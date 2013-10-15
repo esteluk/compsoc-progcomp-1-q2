@@ -25,19 +25,29 @@
                 <ItemsControl x:Name="list">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel HorizontalAlignment="Left" Height="100" Width="290" Orientation="Horizontal">
-                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" Width="145" Height="100"/>
-                                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Margin="145,0,0,0" />
-                            </StackPanel>
+                            <Grid HorizontalAlignment="Left" Height="70" Width="290">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="145" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding DirectionString}" FontSize="24" Width="145" Height="70" Grid.Row="0" Grid.Column="0"/>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Distance}" FontSize="24" Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" />
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
 
             <Button Content="Import data" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="66" Grid.Column="1" Margin="10,0" Visibility="Collapsed"/>
+            <TextBlock x:Name="location" Grid.Column="1" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="24" TextAlignment="Center"/>
 
             <TextBox x:Name="importText" TextWrapping="Wrap" AcceptsReturn="True" Grid.RowSpan="2" Grid.Column="2"/>
             <Button x:Name="confirmImportButton" Content="Confirm" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="195" Click="Button_Click" Grid.Row="2" Grid.Column="2" Margin="0,10,0,0" />
+
         </Grid>
     </Grid>
 </Page>

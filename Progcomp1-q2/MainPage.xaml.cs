@@ -35,16 +35,50 @@ namespace Progcomp1_q2
         {
         }
 
+        private void DataChanged()
+        {
+            int x = 0, y = 0;
+            foreach (Command c in list.Items)
+            {
+                if (c.Direction.Equals(Command.DIRECTION_NORTH))
+                    y += c.Distance;
+                else if (c.Direction.Equals(Command.DIRECTION_EAST))
+                    x += c.Distance;
+                else if (c.Direction.Equals(Command.DIRECTION_SOUTH))
+                    y -= c.Distance;
+                else if (c.Direction.Equals(Command.DIRECTION_WEST))
+                    x -= c.Distance;
+                else if (c.Direction.Equals(Command.DIRECTION_NORTHEAST))
+                {
+                    x += c.Distance; y += c.Distance;
+                }
+                else if (c.Direction.Equals(Command.DIRECTION_SOUTHEAST))
+                {
+                    x += c.Distance; y -= c.Distance;
+                }
+                else if (c.Direction.Equals(Command.DIRECTION_SOUTHWEST))
+                {
+                    x -= c.Distance; y -= c.Distance;
+                }
+                else if (c.Direction.Equals(Command.DIRECTION_NORTHWEST))
+                {
+                    x -= c.Distance; y += c.Distance;
+                }
+            }
+
+            location.Text = "{" + x + ", " + y + "}";
+        }
+
         public class Command
         {
-            public static int DIRECTION_NORTH = 0;
-            public static int DIRECTION_NORTHEAST = 1;
-            public static int DIRECTION_EAST = 2;
-            public static int DIRECTION_SOUTHEAST = 3;
-            public static int DIRECTION_SOUTH = 4;
-            public static int DIRECTION_SOUTH_WEST = 5;
-            public static int DIRECTION_WEST = 6;
-            public static int DIRECTION_NORTHWEST = 7;
+            public const int DIRECTION_NORTH = 0;
+            public const int DIRECTION_NORTHEAST = 1;
+            public const int DIRECTION_EAST = 2;
+            public const int DIRECTION_SOUTHEAST = 3;
+            public const int DIRECTION_SOUTH = 4;
+            public const int DIRECTION_SOUTHWEST = 5;
+            public const int DIRECTION_WEST = 6;
+            public const int DIRECTION_NORTHWEST = 7;
 
             public Command()
             {
@@ -54,6 +88,46 @@ namespace Progcomp1_q2
             {
                 this.Direction = direction;
                 this.Distance = distance;
+            }
+
+            public string DirectionString
+            {
+                get
+                {
+                    string dir;
+                    switch (this.Direction)
+                    {
+                        case (DIRECTION_NORTH):
+                            dir = "North";
+                            break;
+                        case (DIRECTION_NORTHEAST):
+                            dir = "North East";
+                            break;
+                        case (DIRECTION_EAST):
+                            dir = "East";
+                            break;
+                        case (DIRECTION_SOUTHEAST):
+                            dir = "Sourth East";
+                            break;
+                        case (DIRECTION_SOUTH):
+                            dir = "South";
+                            break;
+                        case (DIRECTION_SOUTHWEST):
+                            dir = "South West";
+                            break;
+                        case (DIRECTION_WEST):
+                            dir = "West";
+                            break;
+                        case (DIRECTION_NORTHWEST):
+                            dir = "North West";
+                            break;
+                        default:
+                            dir = "Unknown";
+                            break;
+                    }
+
+                    return dir;
+                }
             }
 
             public int Distance { set; get; }
@@ -96,7 +170,7 @@ namespace Progcomp1_q2
                     }
                     else if (a[0].Equals("SW"))
                     {
-                        c.Direction = Command.DIRECTION_SOUTH_WEST;
+                        c.Direction = Command.DIRECTION_SOUTHWEST;
                     }
                     else if (a[0].Equals("W"))
                     {
@@ -112,6 +186,9 @@ namespace Progcomp1_q2
                     list.Items.Add(c);
                 }
             }
+
+            DataChanged();
+            importText.Text = "";
         }
     }
 }
