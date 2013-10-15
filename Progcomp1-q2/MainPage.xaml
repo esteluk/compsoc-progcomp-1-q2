@@ -8,6 +8,36 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Margin="80,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="290" />
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+
+            <ScrollViewer HorizontalAlignment="Left" Width="290" Grid.RowSpan="3">
+                <ItemsControl x:Name="list">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Left" Height="100" Width="290" Orientation="Horizontal">
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" Width="145" Height="100"/>
+                                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBox" Margin="145,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Button Content="Import data" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="66" Grid.Column="1" Margin="10,0" Visibility="Collapsed"/>
+
+            <TextBox x:Name="importText" TextWrapping="Wrap" AcceptsReturn="True" Grid.RowSpan="2" Grid.Column="2"/>
+            <Button x:Name="confirmImportButton" Content="Confirm" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="195" Click="Button_Click" Grid.Row="2" Grid.Column="2" Margin="0,10,0,0" />
+        </Grid>
     </Grid>
 </Page>
